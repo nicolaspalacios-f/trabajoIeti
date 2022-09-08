@@ -1,14 +1,12 @@
 package co.edu.escuelaing.IetiLab1.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import co.edu.escuelaing.IetiLab1.entities.User;
 
-@Service
 public class UserServiceHashMap implements UserService {
 
     private HashMap<String, User> persistence = new HashMap<>();
@@ -38,5 +36,17 @@ public class UserServiceHashMap implements UserService {
     public User update(User user, String userId) {
         persistence.put(userId, user);
         return user;
+    }
+
+    @Override
+    public List<User> findUsersWithNameOrLastNameLike(String queryText) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<User> findUsersCreatedAfter(Date startDate) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

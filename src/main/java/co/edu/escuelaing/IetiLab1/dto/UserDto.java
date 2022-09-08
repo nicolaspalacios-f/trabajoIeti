@@ -1,5 +1,7 @@
 package co.edu.escuelaing.IetiLab1.dto;
 
+import co.edu.escuelaing.IetiLab1.entities.User;
+
 public class UserDto {
     private String id;
     private String name;
@@ -56,6 +58,10 @@ public class UserDto {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public User toUser() {
+        return new User(id, name, email, lastName, createdAt);
     }
 
 }
