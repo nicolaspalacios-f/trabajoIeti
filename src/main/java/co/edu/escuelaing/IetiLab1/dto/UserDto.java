@@ -1,6 +1,12 @@
 package co.edu.escuelaing.IetiLab1.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import co.edu.escuelaing.IetiLab1.entities.User;
+import co.edu.escuelaing.IetiLab1.utils.RoleEnum;
 
 public class UserDto {
     private String id;
@@ -8,16 +14,18 @@ public class UserDto {
     private String email;
     private String lastName;
     private String createdAt;
+    private String password;
 
     public UserDto() {
     }
 
-    public UserDto(String id, String name, String email, String lastName, String createdAt) {
+    public UserDto(String id, String name, String email, String lastName, String createdAt, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.lastName = lastName;
         this.createdAt = createdAt;
+        this.password = password;
     }
 
     public String getId() {
@@ -60,8 +68,22 @@ public class UserDto {
         this.createdAt = createdAt;
     }
 
-    public User toUser() {
-        return new User(id, name, email, lastName, createdAt);
+    public User toEntity() {
+        try {
+            return new User(id, name, email, lastName, new SimpleDateFormat("dd/MM/yyyy").parse(createdAt),
+                    BCrypt.hashpw(password, BCrypt.gensalt()), RoleEnum.USER);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

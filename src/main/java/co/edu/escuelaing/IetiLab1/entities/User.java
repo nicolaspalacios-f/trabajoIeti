@@ -1,29 +1,42 @@
 package co.edu.escuelaing.IetiLab1.entities;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import co.edu.escuelaing.IetiLab1.dto.UserDto;
+import co.edu.escuelaing.IetiLab1.utils.RoleEnum;
+
 //
 @Document
 public class User {
+
     @Id
     private String id;
     private String name;
     @Indexed(unique = true)
     private String email;
     private String lastName;
-    private String createdAt;
+    private Date createdAt;
+    private String passwordHash;
+    private List<RoleEnum> roles = new ArrayList<>();
 
     public User() {
     }
 
-    public User(String id, String name, String email, String lastName, String createdAt) {
+    public User(String id, String name, String email, String lastName, Date createdAt, String passwordHash,
+            RoleEnum roles) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.lastName = lastName;
         this.createdAt = createdAt;
+        this.passwordHash = passwordHash;
+        this.roles.add(roles);
     }
 
     public String getId() {
@@ -58,15 +71,32 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public User toUser() {
-        return new User(id, name, email, lastName, createdAt.toString());
+    public String getPasswordHash() {
+        return passwordHash;
     }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public List<RoleEnum> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEnum> roles) {
+        this.roles = roles;
+    }
+
+    public UserDto toDTO() {
+        return new UserDto(id, name, email, lastName, "", createdAt.toString());
+    }
+
 }
