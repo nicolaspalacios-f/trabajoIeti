@@ -1,4 +1,4 @@
-package co.edu.escuelaing.IetiLab1.controller.authentication;
+package co.edu.escuelaing.IetiLab1.controller.auth;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
