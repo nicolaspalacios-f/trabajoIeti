@@ -5,6 +5,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import java.util.Date;
 import static co.edu.escuelaing.IetiLab1.utils.Constants.CLAIMS_ROLES_KEY;
 import static co.edu.escuelaing.IetiLab1.utils.Constants.TOKEN_DURATION_MINUTES;;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/v1/auth")
 public class AuthController {
